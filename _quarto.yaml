@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: docs  # Cambiar de _site a docs
+ 
+website:
+  title: "Enmtregable 3"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+       
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    fig-align: center
+    df-print: paged

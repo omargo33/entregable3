@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Enmtregable 3",
+    "section": "",
+    "text": "Code\nimport os\n\n# Verificar directorio actual\nprint(\"Directorio actual:\", os.getcwd())\nprint(\"\\nArchivos en el directorio actual:\")\nfor archivo in os.listdir('.'):\n    print(f\"  - {archivo}\")\n    \nprint(\"\\nArchivos CSV específicamente:\")\ncsv_files = [f for f in os.listdir('.') if f.endswith('.csv')]\nif csv_files:\n    for csv in csv_files:\n        print(f\"  - {csv}\")\nelse:\n    print(\"  No hay archivos CSV en el directorio actual\")\n\n\nDirectorio actual: /home/ovelez/Documentos/cursos/Maestria/modulo2/ejerciciosPhyton/Actividad 3\n\nArchivos en el directorio actual:\n  - index.qmd\n  - .gitignore\n  - _quarto.yaml\n  - index.quarto_ipynb\n  - .quarto\n  - .git\n  - ant-exceso-velocidad-febrero-2022.csv\n  - docs\n\nArchivos CSV específicamente:\n  - ant-exceso-velocidad-febrero-2022.csv"
+  }
+]
