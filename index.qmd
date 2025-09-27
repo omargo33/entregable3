@@ -1,4 +1,4 @@
-# Subimos el archivo csv
+# Subimos el archivo csv de Exceso de Velocidad
 
 
 >Nota técnica
@@ -90,3 +90,10 @@ No concluyente
 >:Q = Quantitative (números continuos)
 >:O = Ordinal (categorías con orden)
 >:N = Nominal (categorías sin orden)
+
+
+**Autores:**
+Grupo 8
+
+Velez Bayas Omar Antonio
+Guanotasig Chiluisa Diego Armando
