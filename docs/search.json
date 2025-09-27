@@ -2,8 +2,22 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Enmtregable 3",
+    "title": "Subimos el archivo csv",
     "section": "",
-    "text": "Code\nimport os\n\n# Verificar directorio actual\nprint(\"Directorio actual:\", os.getcwd())\nprint(\"\\nArchivos en el directorio actual:\")\nfor archivo in os.listdir('.'):\n    print(f\"  - {archivo}\")\n    \nprint(\"\\nArchivos CSV específicamente:\")\ncsv_files = [f for f in os.listdir('.') if f.endswith('.csv')]\nif csv_files:\n    for csv in csv_files:\n        print(f\"  - {csv}\")\nelse:\n    print(\"  No hay archivos CSV en el directorio actual\")\n\n\nDirectorio actual: /home/ovelez/Documentos/cursos/Maestria/modulo2/ejerciciosPhyton/Actividad 3\n\nArchivos en el directorio actual:\n  - index.qmd\n  - .gitignore\n  - _quarto.yaml\n  - index.quarto_ipynb\n  - .quarto\n  - .git\n  - ant-exceso-velocidad-febrero-2022.csv\n  - docs\n\nArchivos CSV específicamente:\n  - ant-exceso-velocidad-febrero-2022.csv"
+    "text": "Nota técnica El archivo está en latín no en UTF y en cp1252\nCode\nimport os\nimport pandas as pd\n\ndf = pd.read_csv('ant-exceso-velocidad-febrero-2022.csv', \n        sep=';',\n        encoding='latin-1')\nprint(\"Cargado con cp1252\")\nprint(df.head())\n\n\nCargado con cp1252\n  PROVINCIA_OPERADORA CIUDAD_OPERADORA IDENTIFICACION_OPERADORA  \\\n0               AZUAY        CHORDELEG              CHORDELEG_1   \n1               AZUAY           CUENCA                 CUENCA_6   \n2               AZUAY           CUENCA                 CUENCA_6   \n3               AZUAY           CUENCA                 CUENCA_6   \n4               AZUAY           CUENCA                 CUENCA_6   \n\n     TIPO_OPERADORA       LATITUD      LONGITUD  \\\n0  INTER PROVINCIAL     -2,895025  -78,98039333   \n1  INTER PROVINCIAL  -3,316711667  -79,65767833   \n2  INTER PROVINCIAL  -3,315931667  -79,59226333   \n3  INTER PROVINCIAL     -3,328715     -79,36929   \n4  INTER PROVINCIAL     -3,185555  -79,17051167   \n\n                  UBICACION_EXCESO CIUDAD_EXCESO PROVINCIA_EXCESO  \\\n0              CUENCA,CUENCA,AZUAY     CHORDELEG            AZUAY   \n1              PUCARA,PUCARA,AZUAY        CUENCA            AZUAY   \n2              PUCARA,PUCARA,AZUAY        CUENCA            AZUAY   \n3  SANTA ISABEL,SANTA ISABEL,AZUAY        CUENCA            AZUAY   \n4                GIRON,GIRON,AZUAY        CUENCA            AZUAY   \n\n  FECHA_ALERTA HORA_ALERTA VELOCIDAD   TIPO_EXCESO  \n0     4/2/2022    12:20:34       103  CUARTA_CLASE  \n1     2/2/2022     8:42:03       101  CUARTA_CLASE  \n2    11/2/2022     7:10:58       101  CUARTA_CLASE  \n3     6/2/2022    12:59:27       103  CUARTA_CLASE  \n4     2/2/2022     7:30:55       101  CUARTA_CLASE"
+  },
+  {
+    "objectID": "index.html#librerias",
+    "href": "index.html#librerias",
+    "title": "Subimos el archivo csv",
+    "section": "Librerias",
+    "text": "Librerias\n\n\nCode\n!pip install vl-convert-python&gt;=1.6.0 vegafusion[embed]&gt;=1.5.0\n\nimport altair as alt"
+  },
+  {
+    "objectID": "index.html#gráfico-de-barras-entre-ciudad-y-velocidad",
+    "href": "index.html#gráfico-de-barras-entre-ciudad-y-velocidad",
+    "title": "Subimos el archivo csv",
+    "section": "Gráfico de barras entre ciudad y velocidad",
+    "text": "Gráfico de barras entre ciudad y velocidad\n\nNota técnica Me dio un error de máximo de utilización por eso uso\n\n\n\nCode\nalt.data_transformers.enable(\"vegafusion\")\n\n\nDataTransformerRegistry.enable('vegafusion')\n\n\n\n\nCode\n# Configurar para datasets grandes sin vegafusion\nalt.data_transformers.enable('default', max_rows=20000)\n\n# Tu gráfico funcionará ahora\nalt.Chart(df).mark_bar().encode(\n    x=alt.X('CIUDAD_EXCESO:N', title='Ciudad'),\n    y=alt.Y('mean(VELOCIDAD):Q', title='Velocidad Promedio'),\n    color=alt.Color('CIUDAD_EXCESO:N', legend=None)\n).properties(\n    width=600,\n    height=400,\n    title='Velocidad Promedio por Ciudad'\n).interactive()\n\n\n\n\n\n\n\n\n\nAnalisis\nEl data set al ser sobre las multas de infracciones se ve que todas las ciudades tiene una gráfica sobre los 90 kilómetros, que ya marca la contravención y podemos ver las ciudades como el tambo que sobrepasa los 120"
   }
 ]

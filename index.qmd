@@ -1,21 +1,54 @@
+# Subimos el archivo csv
 
+
+>Nota técnica
+>El archivo está en latín no en UTF y en cp1252
 ```{python}
 import os
+import pandas as pd
 
-# Verificar directorio actual
-print("Directorio actual:", os.getcwd())
-print("\nArchivos en el directorio actual:")
-for archivo in os.listdir('.'):
-    print(f"  - {archivo}")
-    
-print("\nArchivos CSV específicamente:")
-csv_files = [f for f in os.listdir('.') if f.endswith('.csv')]
-if csv_files:
-    for csv in csv_files:
-        print(f"  - {csv}")
-else:
-    print("  No hay archivos CSV en el directorio actual")
+df = pd.read_csv('ant-exceso-velocidad-febrero-2022.csv', 
+        sep=';',
+        encoding='latin-1')
+print("Cargado con cp1252")
+print(df.head())
 ```
 
 
+## Librerias 
 
+```{python}
+
+!pip install vl-convert-python>=1.6.0 vegafusion[embed]>=1.5.0
+
+import altair as alt
+
+```
+
+## Gráfico de barras entre ciudad y velocidad
+
+>Nota técnica
+>Me dio un error de máximo de utilización por eso uso 
+
+```{python}
+alt.data_transformers.enable("vegafusion")
+```
+
+```{python}
+# Configurar para datasets grandes sin vegafusion
+alt.data_transformers.enable('default', max_rows=20000)
+
+# Tu gráfico funcionará ahora
+alt.Chart(df).mark_bar().encode(
+    x=alt.X('CIUDAD_EXCESO:N', title='Ciudad'),
+    y=alt.Y('mean(VELOCIDAD):Q', title='Velocidad Promedio'),
+    color=alt.Color('CIUDAD_EXCESO:N', legend=None)
+).properties(
+    width=600,
+    height=400,
+    title='Velocidad Promedio por Ciudad'
+).interactive()
+```
+
+### Analisis 
+El data set al ser sobre las multas de infracciones se ve que todas las ciudades tiene una gráfica sobre los 90 kilómetros, que ya marca la contravención y podemos ver las ciudades como el tambo que sobrepasa los 120
