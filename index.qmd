@@ -59,7 +59,7 @@ El data set al ser sobre las multas de infracciones se ve que todas las ciudades
 Primero convertimos la fecha a datetime
 
 
-La data de velocidad no tiene data no tiene una data correcta para un gráfico de dispersión por lo que la grafica solo cumple con el conocimiento de elaboración
+La data de velocidad no tiene información fácil de tabular para un gráfico de dispersión, por lo que la grafica solo cumple con el conocimiento de elaboración de la misma
 
 ```{python}
 
@@ -79,3 +79,14 @@ alt.Chart(df).mark_circle(size=120).encode(
 
 ### Analisis 
 No concluyente
+
+
+
+
+
+>Pie pagina
+>Tipos de datos en Altair:
+>:T = Temporal (fechas y horas)
+>:Q = Quantitative (números continuos)
+>:O = Ordinal (categorías con orden)
+>:N = Nominal (categorías sin orden)
