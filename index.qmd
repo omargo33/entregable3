@@ -52,3 +52,30 @@ alt.Chart(df).mark_bar().encode(
 
 ### Analisis 
 El data set al ser sobre las multas de infracciones se ve que todas las ciudades tiene una gráfica sobre los 90 kilómetros, que ya marca la contravención y podemos ver las ciudades como el tambo que sobrepasa los 120
+
+
+### Diagrama de dispersión temporal
+
+Primero convertimos la fecha a datetime
+
+
+La data de velocidad no tiene data no tiene una data correcta para un gráfico de dispersión por lo que la grafica solo cumple con el conocimiento de elaboración
+
+```{python}
+
+df['FECHA_ALERTA'] = pd.to_datetime(df['FECHA_ALERTA'], format='%d/%m/%Y')
+
+alt.Chart(df).mark_circle(size=120).encode(
+    x=alt.X('FECHA_ALERTA:T', title='Fecha de Alerta'),
+    y=alt.Y('VELOCIDAD:Q', title='Velocidad (km/h)'),
+    color=alt.Color('IDENTIFICACION_OPERADORA:N', title='Operadora'),
+    tooltip=['IDENTIFICACION_OPERADORA', 'VELOCIDAD', 'FECHA_ALERTA', 'HORA_ALERTA', 'CIUDAD_OPERADORA']
+).properties(
+    title='Velocidades de Exceso por Fecha y Operadora',
+    width=600,
+    height=400
+).interactive()
+```
+
+### Analisis 
+No concluyente
